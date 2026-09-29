@@ -32,10 +32,11 @@
       padding-bottom: 2rem;
     }
 
+    /* Header Center Alignment */
     .header-section {
       text-align: center;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .brand-title {
@@ -46,54 +47,54 @@
     }
 
     .brand-subtitle {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       font-weight: 500;
     }
 
+    /* Bento Grid Card Style */
     .bento-card {
       background: var(--bg-surface);
       border-radius: 20px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       border: none;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-      height: 100%;
     }
 
     .section-box {
       background-color: #F8FAFC;
-      border-radius: 14px;
-      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
       border: 1px solid #EEF2F6;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     .section-title-sm {
       font-size: 0.72rem;
       text-transform: uppercase;
       font-weight: 800;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--primary-maroon);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
     .label-uppercase {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
     .stat-number {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 800;
       color: var(--primary-maroon);
       line-height: 1;
@@ -102,12 +103,11 @@
     .form-control-saas, .form-select-saas {
       background-color: #FFFFFF;
       border: 1.5px solid #E2E8F0;
-      border-radius: 10px;
-      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-dark);
-      transition: all 0.2s ease;
     }
 
     .form-control-saas:focus, .form-select-saas:focus {
@@ -126,9 +126,9 @@
       background-color: var(--primary-maroon);
       color: #FFFFFF;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       border-radius: 12px;
-      padding: 0.75rem 1.2rem;
+      padding: 0.75rem 1rem;
       border: none;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(112, 20, 3, 0.2);
@@ -143,21 +143,20 @@
       background-color: #FFFFFF;
       color: var(--text-dark);
       font-weight: 600;
-      border-radius: 10px;
-      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
       border: 1px solid var(--border-color);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .btn-copy {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 6px;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
       border: 1px solid #CBD5E1;
       background-color: #FFFFFF;
       color: #334155;
-      transition: all 0.15s ease;
     }
 
     .btn-copy:hover {
@@ -168,8 +167,8 @@
 
     .badge-pill {
       border-radius: 50px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.7rem;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       display: inline-block;
     }
@@ -178,8 +177,30 @@
     .badge-booked { background-color: #DBEAFE; color: #1E40AF; }
     .badge-completed { background-color: #D1FAE5; color: #065F46; }
 
+    /* PAKSA FORMAT SPLIT SCREEN KIRI KANAN */
+    .split-layout {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .left-panel {
+      flex: 0 0 42%;
+      max-width: 42%;
+    }
+
+    .right-panel {
+      flex: 0 0 58%;
+      max-width: 58%;
+    }
+
+    @media (max-width: 991px) {
+      .split-layout { flex-direction: column; }
+      .left-panel, .right-panel { flex: 0 0 100%; max-width: 100%; }
+    }
+
     .table-container {
-      max-height: 520px;
+      max-height: 480px;
       overflow-y: auto;
     }
 
@@ -190,12 +211,12 @@
     }
 
     .table-saas th {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
       font-weight: 700;
-      padding: 0.6rem 0.8rem;
+      padding: 0.5rem 0.65rem;
       position: sticky;
       top: 0;
       background: var(--bg-surface);
@@ -204,212 +225,173 @@
 
     .table-saas td {
       background: #FFFFFF;
-      padding: 0.75rem 0.8rem;
+      padding: 0.65rem 0.65rem;
       font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       vertical-align: middle;
       border-top: 1px solid #F1F5F9;
       border-bottom: 1px solid #F1F5F9;
     }
 
-    .table-saas td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-left: 1px solid #F1F5F9; }
-    .table-saas td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-right: 1px solid #F1F5F9; }
+    .table-saas td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-left: 1px solid #F1F5F9; }
+    .table-saas td:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-right: 1px solid #F1F5F9; }
 
-    .icon-svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
+    .icon-svg { width: 14px; height: 14px; stroke-width: 2; stroke: currentColor; fill: none; }
     .icon-maroon { stroke: var(--primary-maroon); }
   </style>
 </head>
 <body>
 
-  <!-- DATALIST AUTCOMPLETE DARI DATABASE HISTORI -->
   <datalist id="historiPengirimList"></datalist>
   <datalist id="historiPenerimaList"></datalist>
   <datalist id="historiAlamatPenerimaList"></datalist>
 
-  <div class="container-fluid px-4">
+  <div class="container-fluid px-3">
     
-    <!-- 1. Header Area -->
+    <!-- Header Area -->
     <div class="header-section">
       <h1 class="brand-title">AERIS BEAUTE</h1>
-      <p class="brand-subtitle mb-1">Instant Dispatch Portal & Live Driver Tracking System</p>
-      <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-1 fw-semibold" style="font-size: 0.75rem;"></div>
+      <p class="brand-subtitle mb-1">Instant Dispatch Portal & Live Driver Tracking Directory</p>
+      <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-1 fw-semibold" style="font-size: 0.72rem;"></div>
     </div>
 
-    <!-- 2. SPLIT SCREEN LAYOUT -->
-    <div class="row g-4">
+    <!-- SPLIT LAYOUT LGSG PAKSA KIRI KANAN -->
+    <div class="split-layout">
       
-      <!-- KOLOM KIRI: FORM REQUEST DISPATCH -->
-      <div class="col-lg-5 col-xl-5">
+      <!-- KIRI: FORM REQUEST -->
+      <div class="left-panel">
         <div class="bento-card">
-          <div class="label-uppercase mb-3" style="font-size: 0.8rem;">
+          <div class="label-uppercase mb-2" style="font-size: 0.78rem;">
             <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Form Request Dispatch Instant
           </div>
           
           <form id="dispatchForm" onsubmit="submitRequest(event)">
             
-            <!-- SEKSI 1: DETAIL DOKUMEN & ORDER -->
+            <!-- SEKSI 1 -->
             <div class="section-box">
-              <div class="section-title-sm">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                1. Informasi Dokumen & Channel
-              </div>
+              <div class="section-title-sm">1. Dokumen & Channel</div>
               <div class="row g-2">
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">No. Resi / PO / SJ</label>
+                  <label class="form-label text-sm fw-bold mb-0">No. Resi/PO/SJ</label>
                   <input type="text" id="noSuratJalan" class="form-control form-control-saas" placeholder="SJ-OFF-1029" required>
                 </div>
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">Channel Order</label>
+                  <label class="form-label text-sm fw-bold mb-0">Channel Order</label>
                   <select id="channelSelect" class="form-select form-select-saas" onchange="handleChannelChange(this)" required>
                     <optgroup label="Channel Offline">
-                      <option value="B2B Bulk">B2B Bulk / Distributor</option>
+                      <option value="B2B Bulk">B2B Bulk</option>
                       <option value="Consignment">Consignment</option>
                       <option value="Reseller">Reseller</option>
-                      <option value="Marketing/PR">Marketing / Event PR</option>
+                      <option value="Marketing/PR">Marketing / PR</option>
                     </optgroup>
                     <optgroup label="Online & Internal">
                       <option value="E-Commerce Online">Online Marketplace</option>
-                      <option value="Divisi WH Internal">Divisi WH / Internal</option>
+                      <option value="Divisi WH Internal">Divisi WH Internal</option>
                     </optgroup>
                     <option value="CUSTOM_OPTION">+ Custom Channel</option>
                   </select>
-                  <input type="text" id="customChannelInput" class="form-control form-control-saas custom-channel-input" placeholder="Tulis channel custom...">
+                  <input type="text" id="customChannelInput" class="form-control form-control-saas custom-channel-input" placeholder="Nama channel custom...">
                 </div>
-                <div class="col-6 mt-2">
-                  <label class="form-label text-sm fw-bold mb-1">Jumlah Koli/Box</label>
+                <div class="col-6 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">Koli/Box</label>
                   <input type="number" id="jumlahKoli" class="form-control form-control-saas" placeholder="1" min="1" required>
                 </div>
-                <div class="col-6 mt-2">
-                  <label class="form-label text-sm fw-bold mb-1">PIC Admin WH</label>
+                <div class="col-6 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">PIC Admin WH</label>
                   <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Nama Admin" required>
                 </div>
               </div>
             </div>
 
-            <!-- SEKSI 2: DETAIL PENGIRIM (DENGAN ALAMAT LENGKAP BISA DIUBAH/AUTOCOMPLETE) -->
+            <!-- SEKSI 2 -->
             <div class="section-box">
-              <div class="section-title-sm">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                2. Informasi Pengirim (Gudang Penjemputan)
-              </div>
+              <div class="section-title-sm">2. Info Pengirim (Penjemputan)</div>
               <div class="row g-2">
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">Nama Pengirim</label>
+                  <label class="form-label text-sm fw-bold mb-0">Pengirim</label>
                   <input type="text" id="namaPengirim" list="historiPengirimList" class="form-control form-control-saas" value="Gudang Aeris Beaute" required>
                 </div>
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">No. Telp/WA</label>
+                  <label class="form-label text-sm fw-bold mb-0">No. Telp/WA</label>
                   <input type="text" id="telpPengirim" class="form-control form-control-saas" value="085892011583" required>
                 </div>
-                <div class="col-12 mt-2">
-                  <label class="form-label text-sm fw-bold mb-1">Alamat Penjemputan Gudang Lengkap</label>
-                  <!-- KETIK KEYWORD ATAU UBAH ALAMAT DI SINI -->
-                  <input type="text" id="alamatPengirim" class="form-control form-control-saas" value="Gudang Aeris Beaute, Gedung Hyundai Lt. 5, Jl. D.I. Panjaitan No. 138, Cipinang Muara, Jatinegara, Jakarta Timur, 13340" required>
+                <div class="col-12 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">Alamat Gudang Penjemputan</label>
+                  <input type="text" id="alamatPengirim" class="form-control form-control-saas" value="Gudang Aeris Lt. 5, Jl. DI. Panjaitan No.138, RT.15/RW.2, Cipinang Besar Sel., Jatinegara, Jakarta Timur 13410" required>
                 </div>
               </div>
             </div>
 
-            <!-- SEKSI 3: DETAIL PENERIMA (AUTOCOMPLETE DARI HISTORI DATABASE) -->
+            <!-- SEKSI 3 -->
             <div class="section-box">
-              <div class="section-title-sm">
-                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                3. Informasi Penerima (Autocomplete Database)
-              </div>
+              <div class="section-title-sm">3. Info Penerima (Tujuan)</div>
               <div class="row g-2">
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">Nama Penerima/Toko</label>
-                  <input type="text" id="namaPenerima" list="historiPenerimaList" class="form-control form-control-saas" placeholder="Ketik keyword nama..." onchange="autoFillPenerima(this.value)" required>
+                  <label class="form-label text-sm fw-bold mb-0">Penerima/Toko</label>
+                  <input type="text" id="namaPenerima" list="historiPenerimaList" class="form-control form-control-saas" placeholder="Keyword nama..." onchange="autoFillPenerima(this.value)" required>
                 </div>
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-1">No. HP/WA Penerima</label>
+                  <label class="form-label text-sm fw-bold mb-0">No. HP/WA</label>
                   <input type="text" id="telpPenerima" class="form-control form-control-saas" placeholder="0812xxxxxxx" required>
                 </div>
-                <div class="col-12 mt-2">
-                  <label class="form-label text-sm fw-bold mb-1">Alamat Tujuan Pengiriman</label>
-                  <input type="text" id="alamatPenerima" list="historiAlamatPenerimaList" class="form-control form-control-saas" placeholder="Ketik keyword/pilih alamat yang pernah digunakan..." required>
+                <div class="col-12 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">Alamat Tujuan Pengiriman</label>
+                  <input type="text" id="alamatPenerima" list="historiAlamatPenerimaList" class="form-control form-control-saas" placeholder="Keyword alamat..." required>
                 </div>
               </div>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-aeris-primary w-100 d-flex align-items-center justify-content-center gap-2">
-              <svg class="icon-svg" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <button type="submit" class="btn btn-aeris-primary w-100 d-flex align-items-center justify-content-center gap-2 mt-2">
               Kirim Request Transport & PING CS
             </button>
           </form>
         </div>
       </div>
 
-      <!-- KOLOM KANAN: SUMMARY METRICS & LOG DISPATCH -->
-      <div class="col-lg-7 col-xl-7">
+      <!-- KANAN: METRICS & LOG TABLE -->
+      <div class="right-panel">
         
-        <div class="row g-3 mb-3">
+        <div class="row g-2 mb-2">
           <div class="col-4">
-            <div class="bento-card p-3">
-              <div class="label-uppercase">
-                <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                Pending
-              </div>
-              <div class="stat-number mt-1" id="metricPending">0</div>
+            <div class="bento-card p-2 text-center">
+              <div class="label-uppercase justify-content-center">Pending</div>
+              <div class="stat-number" id="metricPending">0</div>
             </div>
           </div>
           <div class="col-4">
-            <div class="bento-card p-3">
-              <div class="label-uppercase">
-                <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                Booked
-              </div>
-              <div class="stat-number mt-1" id="metricBooked" style="color: #2563EB;">0</div>
+            <div class="bento-card p-2 text-center">
+              <div class="label-uppercase justify-content-center">Booked</div>
+              <div class="stat-number" id="metricBooked" style="color: #2563EB;">0</div>
             </div>
           </div>
           <div class="col-4">
-            <div class="bento-card p-3">
-              <div class="label-uppercase">
-                <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                Completed
-              </div>
-              <div class="stat-number mt-1" id="metricCompleted" style="color: #059669;">0</div>
+            <div class="bento-card p-2 text-center">
+              <div class="label-uppercase justify-content-center">Completed</div>
+              <div class="stat-number" id="metricCompleted" style="color: #059669;">0</div>
             </div>
           </div>
         </div>
 
         <div class="bento-card">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="label-uppercase mb-0" style="font-size: 0.8rem;">
-              <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-              Aktivitas & Log Dispatch
-            </div>
-            <button class="btn btn-aeris-secondary d-flex align-items-center gap-1" onclick="loadData()">
-              <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-              Refresh
-            </button>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="label-uppercase mb-0">Aktivitas & Log Dispatch</div>
+            <button class="btn btn-aeris-secondary" onclick="loadData()">Refresh</button>
           </div>
 
           <div class="table-container">
             <table class="table-saas">
               <thead>
                 <tr>
-                  <th>Detail Order</th>
-                  <th>Info Pengirim & Penerima (One-Click Copy CS)</th>
+                  <th>Order</th>
+                  <th>Pengirim & Penerima (Copy CS)</th>
                   <th>Status</th>
-                  <th>Info Driver / Live Link</th>
-                  <th class="text-end">Aksi CS / WH</th>
+                  <th>Driver / Link</th>
+                  <th class="text-end">Aksi CS/WH</th>
                 </tr>
               </thead>
               <tbody id="tableBody">
-                <tr>
-                  <td colspan="5" class="text-center py-5 text-muted">Memuat database dispatch...</td>
-                </tr>
+                <tr><td colspan="5" class="text-center py-4 text-muted">Memuat data...</td></tr>
               </tbody>
             </table>
           </div>
@@ -420,19 +402,19 @@
 
   </div>
 
-  <!-- MODAL DIALOG INPUT CS -->
+  <!-- MODAL CS -->
   <div class="modal fade" id="csInputModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content rounded-4 border-0 p-3 shadow-lg">
         <div class="modal-header border-0 pb-0">
-          <h5 class="modal-title fw-bold" style="color: var(--primary-maroon);">🛵 Penugasan Driver Instant CS</h5>
+          <h5 class="modal-title fw-bold" style="color: var(--primary-maroon);">🛵 Penugasan Driver CS</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <input type="hidden" id="modalRowIndex">
           
-          <div class="mb-3">
-            <label class="form-label text-sm fw-bold">Platform / Provider Ekspedisi</label>
+          <div class="mb-2">
+            <label class="form-label text-sm fw-bold">Platform Ekspedisi</label>
             <select id="modalPlatform" class="form-select form-select-saas">
               <option value="GoSend Instant">GoSend Instant</option>
               <option value="GrabExpress Instant">GrabExpress Instant</option>
@@ -442,15 +424,14 @@
             </select>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label text-sm fw-bold">Kode Booking / Nama Driver / Plat Nomor</label>
+          <div class="mb-2">
+            <label class="form-label text-sm fw-bold">Kode Booking / Nama / Plat Driver</label>
             <input type="text" id="modalKodeBooking" class="form-control form-control-saas" placeholder="Contoh: GK-102938 / Budi (B 1234 ABC)" required>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label text-sm fw-bold">Link Live Tracking (GoSend/Grab/Lalamove)</label>
-            <input type="url" id="modalTrackingLink" class="form-control form-control-saas" placeholder="https://track.gosend.com/xxx atau https://lalamove.com/xxx">
-            <small class="text-muted" style="font-size: 0.72rem;">*Tempel link live tracking agar tim gudang bisa langsung klik lacak.</small>
+          <div class="mb-2">
+            <label class="form-label text-sm fw-bold">Link Live Tracking</label>
+            <input type="url" id="modalTrackingLink" class="form-control form-control-saas" placeholder="https://track.gosend.com/xxx">
           </div>
         </div>
         <div class="modal-footer border-0 pt-0">
@@ -462,9 +443,10 @@
   </div>
 
   <script>
+    // MASUKKAN URL APPS SCRIPT KAMU BERAKHIRAN /exec DI SINI
     const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
     let csModal;
-    let globalDataCache = []; // Cache untuk histori autocomplete
+    let globalDataCache = [];
 
     document.addEventListener("DOMContentLoaded", function() {
       csModal = new bootstrap.Modal(document.getElementById('csInputModal'));
@@ -472,7 +454,7 @@
 
     function updateClock() {
       const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       document.getElementById('liveClock').innerText = now.toLocaleDateString('id-ID', options) + ' WIB';
     }
     setInterval(updateClock, 1000);
@@ -504,13 +486,10 @@
       });
     }
 
-    // Mengisi Datalist Autocomplete dari Histori Database
     function populateAutocomplete(data) {
       const historiPenerimaList = document.getElementById("historiPenerimaList");
       const historiAlamatList = document.getElementById("historiAlamatPenerimaList");
-      
-      let penerimaSet = new Set();
-      let alamatSet = new Set();
+      let penerimaSet = new Set(), alamatSet = new Set();
 
       data.forEach(item => {
         if(item.namaPenerima) penerimaSet.add(item.namaPenerima);
@@ -521,7 +500,6 @@
       historiAlamatList.innerHTML = Array.from(alamatSet).map(val => `<option value="${val}">`).join('');
     }
 
-    // Auto-fill No HP & Alamat saat Nama Penerima Dipilih
     function autoFillPenerima(val) {
       const match = globalDataCache.find(item => item.namaPenerima === val);
       if (match) {
@@ -534,9 +512,8 @@
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
-        globalDataCache = data; // Simpan cache
-        
-        populateAutocomplete(data); // Populate Autocomplete
+        globalDataCache = data;
+        populateAutocomplete(data);
 
         let pendingCount = 0, bookedCount = 0, completedCount = 0;
         let html = "";
@@ -552,28 +529,24 @@
 
           let timeFormatted = new Date(row.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
-          let pengirimCopyStr = `${row.namaPengirim || 'Gudang Aeris Beaute'} (${row.telpPengirim || '085892011583'}) - ${row.alamatPengirim || 'Gudang Aeris Lt. 5, Jl. DI. Panjaitan No.138, RT.15/RW.2, Cipinang Besar Sel., Jatinegara, Jakarta Timur 13410'}`;
+          let pengirimCopyStr = `${row.namaPengirim || 'Gudang Aeris Beaute'} (${row.telpPengirim || '085892011583'}) - ${row.alamatPengirim || 'Gudang Aeris Lt. 5'}`;
           let penerimaCopyStr = `${row.namaPenerima || '-'} (${row.telpPenerima || '-'}) - ${row.alamatPenerima || '-'}`;
 
           html += `
             <tr>
               <td>
                 <div class="fw-bold">${row.noSuratJalan}</div>
-                <span class="badge bg-light text-dark border me-1">${row.channel}</span>
+                <span class="badge bg-light text-dark border me-1" style="font-size:0.68rem;">${row.channel}</span>
                 <span class="text-muted small">${row.jumlahKoli} Box</span>
-                <div class="text-muted" style="font-size: 0.72rem;">${timeFormatted} | PIC: ${row.picAdmin}</div>
+                <div class="text-muted" style="font-size: 0.7rem;">${timeFormatted} | PIC: ${row.picAdmin}</div>
               </td>
               <td>
-                <div class="p-2 rounded-3 bg-light border" style="font-size: 0.78rem;">
-                  <!-- PENGIRIM -->
+                <div class="p-2 rounded-2 bg-light border" style="font-size: 0.75rem;">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <span class="text-muted"><strong>Dari:</strong> ${row.namaPengirim || 'WH Aeris'}</span>
                     <button class="btn btn-copy" onclick="copyText('${pengirimCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Pengirim</button>
                   </div>
-                  
                   <hr class="my-1 border-secondary opacity-25">
-                  
-                  <!-- PENERIMA -->
                   <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
                     <span class="text-dark"><strong>Ke:</strong> ${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</span>
                     <button class="btn btn-copy" onclick="copyText('${penerimaCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Penerima</button>
@@ -584,8 +557,8 @@
               <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
               <td>
                 ${row.kodeBooking && row.kodeBooking !== '-' ? `
-                  <div class="fw-bold" style="font-size: 0.8rem;">${row.kodeBooking}</div>${row.trackingLink && row.trackingLink !== '#' ? `
-                    <a href="${row.trackingLink}" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 mt-1 fw-bold" style="font-size: 0.7rem;">
+                  <div class="fw-bold" style="font-size: 0.78rem;">${row.kodeBooking}</div>${row.trackingLink && row.trackingLink !== '#' ? `
+                    <a href="${row.trackingLink}" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 mt-1 fw-bold" style="font-size: 0.68rem;">
                       🔗 Lacak Driver Live
                     </a>
                   ` : ''}
@@ -593,9 +566,9 @@
               </td>
               <td class="text-end">
                 ${row.status === 'PENDING BOOKING' ? 
-                  `<button class="btn btn-sm btn-primary fw-bold rounded-3" onclick="openCSModal(${row.rowIndex})">CS: Assign Driver</button>` : ''}
+                  `<button class="btn btn-sm btn-primary fw-bold rounded-2" style="font-size:0.75rem;" onclick="openCSModal(${row.rowIndex})">CS: Assign</button>` : ''}
                 ${row.status === 'DRIVER BOOKED' ? 
-                  `<button class="btn btn-sm btn-success fw-bold rounded-3" onclick="completeHandover(${row.rowIndex})">WH: Handover</button>` : ''}
+                  `<button class="btn btn-sm btn-success fw-bold rounded-2" style="font-size:0.75rem;" onclick="completeHandover(${row.rowIndex})">WH: Handover</button>` : ''}
                 ${row.status === 'COMPLETED' ? `<span class="text-success small fw-bold">✓ Selesai</span>` : ''}
               </td>
             </tr>
@@ -613,7 +586,6 @@
 
     async function submitRequest(e) {
       e.preventDefault();
-      
       let selectedChannel = document.getElementById("channelSelect").value;
       if (selectedChannel === "CUSTOM_OPTION") {
         selectedChannel = document.getElementById("customChannelInput").value.trim();
@@ -634,7 +606,6 @@
       };
 
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
-      
       document.getElementById("dispatchForm").reset();
       document.getElementById("customChannelInput").style.display = "none";
       loadData();
@@ -659,13 +630,7 @@
       }
 
       const fullDriverStr = `[${platform}] ${kodeBooking}`;
-
-      const payload = { 
-        action: "UPDATE_BOOKING", 
-        rowIndex: rowIndex, 
-        kodeBooking: fullDriverStr,
-        trackingLink: trackingLink || "#" 
-      };
+      const payload = { action: "UPDATE_BOOKING", rowIndex: rowIndex, kodeBooking: fullDriverStr, trackingLink: trackingLink || "#" };
 
       csModal.hide();
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });

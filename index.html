@@ -3,157 +3,496 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AERIS - Offline Dispatch Dashboard</title>
+  <title>AERIS Beaute - Instant Dispatch Portal</title>
+  
+  <!-- Font Modern Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <style>
-    body { background-color: #FAF0F2; color: #1E293B; font-family: 'Plus Jakarta Sans', sans-serif; }
-    .card-aeris { background: #FFFFFF; border-radius: 16px; border: 1px solid #F3D5DB; box-shadow: 0 4px 12px rgba(112, 20, 3, 0.05); }
-    .btn-maroon { background-color: #701403; color: white; font-weight: 600; border-radius: 8px; }
-    .btn-maroon:hover { background-color: #520e02; color: white; }
-    .badge-pending { background-color: #FEF3C7; color: #D97706; }
-    .badge-booked { background-color: #DBEAFE; color: #2563EB; }
-    .badge-completed { background-color: #D1FAE5; color: #059669; }
+    :root {
+      --primary-maroon: #701403;
+      --primary-hover: #540e02;
+      --bg-main: #F3F5F9;
+      --bg-surface: #FFFFFF;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 3rem;
+    }
+
+    /* Header Center Alignment */
+    .header-section {
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary-maroon);
+      font-size: 2.2rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Bento Grid Card Style */
+    .bento-card {
+      background: var(--bg-surface);
+      border-radius: 24px;
+      padding: 1.8rem;
+      border: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(112, 20, 3, 0.06);
+    }
+
+    /* Label Typography Standard */
+    .label-uppercase {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Stat Metric Display */
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-maroon);
+      line-height: 1;
+    }
+
+    /* Large Input Form Style */
+    .form-control-saas, .form-select-saas {
+      background-color: #F8FAFC;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      padding: 0.85rem 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+    }
+
+    .form-control-saas:focus, .form-select-saas:focus {
+      background-color: #FFFFFF;
+      border-color: var(--primary-maroon);
+      box-shadow: 0 0 0 4px rgba(112, 20, 3, 0.1);
+      outline: none;
+    }
+
+    /* Custom Dropdown Styling */
+    .custom-channel-input {
+      display: none;
+      margin-top: 0.5rem;
+    }
+
+    /* Button Primary Accent */
+    .btn-aeris-primary {
+      background-color: var(--primary-maroon);
+      color: #FFFFFF;
+      font-weight: 700;
+      border-radius: 16px;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(112, 20, 3, 0.2);
+    }
+
+    .btn-aeris-primary:hover {
+      background-color: var(--primary-hover);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .btn-aeris-secondary {
+      background-color: #FFFFFF;
+      color: var(--text-dark);
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+
+    .btn-aeris-secondary:hover {
+      background-color: #F1F5F9;
+    }
+
+    /* Status Pill Badges */
+    .badge-pill {
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    .badge-pending {
+      background-color: #FEF3C7;
+      color: #92400E;
+    }
+
+    .badge-booked {
+      background-color: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .badge-completed {
+      background-color: #D1FAE5;
+      color: #065F46;
+    }
+
+    /* Modern Table Styling */
+    .table-saas {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 0.5rem;
+    }
+
+    .table-saas th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 1rem;
+      border: none;
+    }
+
+    .table-saas td {
+      background: #FFFFFF;
+      padding: 1rem;
+      font-weight: 600;
+      vertical-align: middle;
+      border-top: 1px solid #F1F5F9;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .table-saas td:first-child {
+      border-top-left-radius: 14px;
+      border-bottom-left-radius: 14px;
+      border-left: 1px solid #F1F5F9;
+    }
+
+    .table-saas td:last-child {
+      border-top-right-radius: 14px;
+      border-bottom-right-radius: 14px;
+      border-right: 1px solid #F1F5F9;
+    }
+
+    /* SVG Icon Sizing */
+    .icon-svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-maroon {
+      stroke: var(--primary-maroon);
+    }
   </style>
 </head>
-<body class="py-4">
-  <div class="container">
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h3 class="fw-bold mb-0" style="color: #701403;">AERIS BEAUTE</h3>
-        <p class="text-muted mb-0">Offline Order Instant Dispatch Portal</p>
+<body>
+
+  <div class="container max-width-lg">
+    
+    <!-- 1. Header Area (Center Aligned) -->
+    <div class="header-section">
+      <div class="d-inline-flex align-items-center justify-content-center p-3 mb-2 rounded-circle" style="background: rgba(112, 20, 3, 0.08);">
+        <svg class="icon-svg icon-maroon" style="width: 32px; height: 32px;" viewBox="0 0 24 24">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
       </div>
-      <button class="btn btn-outline-secondary btn-sm" onclick="loadData()">🔄 Refresh Data</button>
+      <h1 class="brand-title">AERIS BEAUTE</h1>
+      <p class="brand-subtitle">Instant Dispatch Portal & Multi-Channel Transport Tracking</p>
+      <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-2 mt-1 fw-semibold" style="font-size: 0.8rem;">
+        <!-- Clock via JS -->
+      </div>
     </div>
 
-    <!-- Form Input Request Gudang -->
-    <div class="card card-aeris p-4 mb-4">
-      <h5 class="fw-bold mb-3" style="color: #701403;">📦 Input Request Ekspedisi Instant (WH Admin)</h5>
+    <!-- 2. Top Bento Grid (Summary Metrics) -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="bento-card">
+          <div class="label-uppercase">
+            <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Pending Booking
+          </div>
+          <div class="stat-number" id="metricPending">0</div>
+          <small class="text-muted mt-2 d-block">Menunggu penugasan CS</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bento-card">
+          <div class="label-uppercase">
+            <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            Driver Booked
+          </div>
+          <div class="stat-number" id="metricBooked" style="color: #2563EB;">0</div>
+          <small class="text-muted mt-2 d-block">Driver menuju gudang</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bento-card">
+          <div class="label-uppercase">
+            <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Completed
+          </div>
+          <div class="stat-number" id="metricCompleted" style="color: #059669;">0</div>
+          <small class="text-muted mt-2 d-block">Selesai pickup hari ini</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Bento Card: Form Input Request Dispatch -->
+    <div class="bento-card mb-4">
+      <div class="label-uppercase mb-3">
+        <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Form Request Pickup Instant
+      </div>
+      
       <form id="dispatchForm" onsubmit="submitRequest(event)">
         <div class="row g-3">
+          <!-- No Surat Jalan -->
           <div class="col-md-3">
-            <label class="form-label text-sm fw-semibold">No. Surat Jalan / PO</label>
-            <input type="text" id="noSuratJalan" class="form-control" placeholder="Contoh: SJ-B2B-1029" required>
+            <label class="form-label text-sm fw-bold">No. Resi / PO / Surat Jalan</label>
+            <input type="text" id="noSuratJalan" class="form-control form-control-saas" placeholder="SJ-OFF-1029 atau ID Resi" required>
           </div>
+          
+          <!-- Channel Select (With Custom Option) -->
           <div class="col-md-3">
-            <label class="form-label text-sm fw-semibold">Channel Offline</label>
-            <select id="channel" class="form-select" required>
-              <option value="B2B">B2B Bulk</option>
-              <option value="Consignment">Consignment</option>
-              <option value="Marketing">Marketing / PR</option>
-              <option value="Reseller">Reseller</option>
+            <label class="form-label text-sm fw-bold">Channel Asal Order</label>
+            <select id="channelSelect" class="form-select form-select-saas" onchange="handleChannelChange(this)" required>
+              <optgroup label="Channel Offline">
+                <option value="B2B Bulk">B2B Bulk / Distributor</option>
+                <option value="Consignment">Consignment</option>
+                <option value="Reseller">Reseller</option>
+                <option value="Marketing/PR">Marketing / Event PR</option>
+              </optgroup>
+              <optgroup label="Channel Online & Internal">
+                <option value="E-Commerce Online">Online Marketplace (Manual Request)</option>
+                <option value="Divisi WH Internal">Divisi WH / Internal Transfer</option>
+              </optgroup>
+              <option value="CUSTOM_OPTION">+ Tambah Channel Lain (Custom)</option>
             </select>
+            <!-- Custom Input Input Field (Appears when Custom selected) -->
+            <input type="text" id="customChannelInput" class="form-control form-control-saas custom-channel-input" placeholder="Tulis nama channel custom...">
           </div>
+          
+          <!-- QTY Koli -->
           <div class="col-md-3">
-            <label class="form-label text-sm fw-semibold">Jumlah Koli/Box</label>
-            <input type="number" id="jumlahKoli" class="form-control" placeholder="1" required>
+            <label class="form-label text-sm fw-bold">Jumlah Koli / Master Box</label>
+            <input type="number" id="jumlahKoli" class="form-control form-control-saas" placeholder="1" min="1" required>
           </div>
+          
+          <!-- PIC Admin -->
           <div class="col-md-3">
-            <label class="form-label text-sm fw-semibold">PIC Admin WH</label>
-            <input type="text" id="picAdmin" class="form-control" placeholder="Nama Admin" required>
+            <label class="form-label text-sm fw-bold">PIC Admin Request</label>
+            <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Nama Admin WH/Divisi" required>
           </div>
         </div>
-        <button type="submit" class="btn btn-maroon mt-3 w-100">🚀 Submit Request Ekspedisi</button>
+
+        <button type="submit" class="btn btn-aeris-primary w-100 mt-4 d-flex align-items-center justify-content-center gap-2">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          Kirim Request Transport Instant
+        </button>
       </form>
     </div>
 
-    <!-- Tabel Monitoring & Action -->
-    <div class="card card-aeris p-4">
-      <h5 class="fw-bold mb-3" style="color: #701403;">📋 Monitoring Status Request Offline</h5>
+    <!-- 4. Bento Card: Monitoring Table -->
+    <div class="bento-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="label-uppercase mb-0">
+          <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          Aktivitas & Log Dispatch
+        </div>
+        <button class="btn btn-aeris-secondary btn-sm d-flex align-items-center gap-2" onclick="loadData()">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          Refresh Data
+        </button>
+      </div>
+
       <div class="table-responsive">
-        <table class="table table-hover align-middle">
-          <thead class="table-light">
+        <table class="table-saas">
+          <thead>
             <tr>
-              <th>Jam Request</th>
-              <th>No. Surat Jalan</th>
+              <th>Waktu Request</th>
+              <th>No. Surat Jalan / PO</th>
               <th>Channel</th>
               <th>Koli</th>
-              <th>PIC WH</th>
+              <th>PIC Request</th>
               <th>Status</th>
-              <th>Info Driver / Booking</th>
-              <th>Aksi CS & Outbound</th>
+              <th>Kode Driver / Booking</th>
+              <th class="text-end">Aksi Koordinasi</th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <tr><td colspan="8" class="text-center py-4">Memuat data...</td></tr>
+            <tr>
+              <td colspan="8" class="text-center py-5 text-muted">
+                Memuat database dispatch...
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
+
   </div>
 
   <script>
-    // GANTI SAMA URL APPS SCRIPT KAMU
+    // MASUKKAN URL GOOGLE APPS SCRIPT KAMU DI SINI (BERAKHIRAN /exec)
     const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
 
+    // Clock Rata Tengah
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      document.getElementById('liveClock').innerText = now.toLocaleDateString('id-ID', options) + ' WIB';
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Handle Custom Channel Dropdown
+    function handleChannelChange(selectEl) {
+      const customInput = document.getElementById("customChannelInput");
+      if (selectEl.value === "CUSTOM_OPTION") {
+        customInput.style.display = "block";
+        customInput.required = true;
+        customInput.focus();
+      } else {
+        customInput.style.display = "none";
+        customInput.required = false;
+      }
+    }
+
+    // Load Data & Update Metric Badges
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
-        let html = "";
         
+        let pendingCount = 0;
+        let bookedCount = 0;
+        let completedCount = 0;
+        let html = "";
+
         data.reverse().forEach(row => {
+          if (row.status === "PENDING BOOKING") pendingCount++;
+          if (row.status === "DRIVER BOOKED") bookedCount++;
+          if (row.status === "COMPLETED") completedCount++;
+
           let badgeClass = "badge-pending";
-          if(row.status === "DRIVER BOOKED") badgeClass = "badge-booked";
-          if(row.status === "COMPLETED") badgeClass = "badge-completed";
-          
-          let dateFormatted = new Date(row.timestamp).toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
+          if (row.status === "DRIVER BOOKED") badgeClass = "badge-booked";
+          if (row.status === "COMPLETED") badgeClass = "badge-completed";
+
+          let timeFormatted = new Date(row.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
           html += `
             <tr>
-              <td><small class="text-muted">${dateFormatted}</small></td>
+              <td><span class="text-muted fw-normal">${timeFormatted}</span></td>
               <td class="fw-bold">${row.noSuratJalan}</td>
-              <td><span class="badge bg-secondary">${row.channel}</span></td>
+              <td><span class="badge bg-light text-dark border px-2 py-1">${row.channel}</span></td>
               <td>${row.jumlahKoli} Box</td>
               <td>${row.picAdmin}</td>
-              <td><span class="badge ${badgeClass}">${row.status}</span></td>
-              <td><small>${row.kodeBooking}</small></td>
-              <td>
+              <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
+              <td><small class="font-monospace text-muted">${row.kodeBooking || '-'}</small></td>
+              <td class="text-end">
                 ${row.status === 'PENDING BOOKING' ? 
-                  `<button class="btn btn-sm btn-primary" onclick="updateBooking(${row.rowIndex})">CS: Input Driver</button>` : ''}
+                  `<button class="btn btn-sm btn-primary fw-bold rounded-3" onclick="updateBooking(${row.rowIndex})">CS: Input Driver</button>` : ''}
                 ${row.status === 'DRIVER BOOKED' ? 
-                  `<button class="btn btn-sm btn-success" onclick="completeHandover(${row.rowIndex})">WH: Complete</button>` : ''}
-                ${row.status === 'COMPLETED' ? `<small class="text-success">✓ Selesai</small>` : ''}
+                  `<button class="btn btn-sm btn-success fw-bold rounded-3" onclick="completeHandover(${row.rowIndex})">WH: Handover</button>` : ''}
+                ${row.status === 'COMPLETED' ? `<span class="text-success small fw-bold">✓ Selesai</span>` : ''}
               </td>
             </tr>
           `;
         });
-        document.getElementById("tableBody").innerHTML = html || "<tr><td colspan='8' class='text-center'>Belum ada request.</td></tr>";
-      } catch(err) {
-        console.error(err);
+
+        document.getElementById("metricPending").innerText = pendingCount;
+        document.getElementById("metricBooked").innerText = bookedCount;
+        document.getElementById("metricCompleted").innerText = completedCount;
+
+        document.getElementById("tableBody").innerHTML = html || `<tr><td colspan="8" class="text-center py-4 text-muted">Belum ada aktivitas request hari ini.</td></tr>`;
+      } catch (err) {
+        console.error("Error fetching data:", err);
       }
     }
 
+    // Submit New Request
     async function submitRequest(e) {
       e.preventDefault();
+      
+      let selectedChannel = document.getElementById("channelSelect").value;
+      if (selectedChannel === "CUSTOM_OPTION") {
+        selectedChannel = document.getElementById("customChannelInput").value.trim();
+      }
+
       const payload = {
         action: "CREATE_REQUEST",
-        noSuratJalan: document.getElementById("noSuratJalan").value,
-        channel: document.getElementById("channel").value,
+        noSuratJalan: document.getElementById("noSuratJalan").value.trim(),
+        channel: selectedChannel,
         jumlahKoli: document.getElementById("jumlahKoli").value,
-        picAdmin: document.getElementById("picAdmin").value
+        picAdmin: document.getElementById("picAdmin").value.trim()
       };
+
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
+      
       document.getElementById("dispatchForm").reset();
+      document.getElementById("customChannelInput").style.display = "none";
       loadData();
     }
 
+    // CS Update Driver Info
     async function updateBooking(rowIndex) {
-      const driverInfo = prompt("CS: Masukkan Nama Driver & Plat Nomor / Kode Booking:");
+      const driverInfo = prompt("CS Section: Masukkan Nama Ekspedisi, Nama Driver, & Kode Booking / Plat Nomor:");
       if (!driverInfo) return;
+      
       const payload = { action: "UPDATE_BOOKING", rowIndex: rowIndex, kodeBooking: driverInfo };
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
       loadData();
     }
 
+    // WH Outbound Complete Handover
     async function completeHandover(rowIndex) {
-      if(confirm("Konfirmasi barang sudah dibawa driver?")) {
+      if (confirm("Konfirmasi: Paket sudah diserahkan ke Driver Instant?")) {
         const payload = { action: "COMPLETE_HANDOVER", rowIndex: rowIndex };
         await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
         loadData();
       }
     }
 
+    // Initial Load
     loadData();
   </script>
 </body>

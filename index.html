@@ -206,6 +206,23 @@
     .table-saas td:first-child { border-top-left-radius: 14px; border-bottom-left-radius: 14px; border-left: 1px solid #F1F5F9; }
     .table-saas td:last-child { border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-right: 1px solid #F1F5F9; }
 
+    .btn-copy {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      background-color: #F8FAFC;
+      color: #334155;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy:hover {
+      background-color: var(--primary-maroon);
+      color: #FFFFFF;
+      border-color: var(--primary-maroon);
+    }
+
     .icon-svg {
       width: 18px;
       height: 18px;
@@ -233,11 +250,11 @@
         </svg>
       </div>
       <h1 class="brand-title">AERIS BEAUTE</h1>
-      <p class="brand-subtitle">Instant Dispatch Portal & Multi-Channel Transport Tracking</p>
+      <p class="brand-subtitle">Instant Dispatch Portal & One-Click Copy Directory</p>
       <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-2 mt-1 fw-semibold" style="font-size: 0.8rem;"></div>
     </div>
 
-    <!-- 2. Summary Metrics Bento Grid -->
+    <!-- 2. Metrics Bento Grid -->
     <div class="row g-4 mb-4">
       <div class="col-md-4">
         <div class="bento-card">
@@ -371,7 +388,7 @@
       </form>
     </div>
 
-    <!-- 4. Monitoring Table -->
+    <!-- 4. Monitoring Table dengan Tombol Copy CS -->
     <div class="bento-card">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="label-uppercase mb-0">
@@ -392,9 +409,9 @@
               <th>No. Resi / PO</th>
               <th>Channel</th>
               <th>Koli</th>
-              <th>Detail Pengirim & Penerima</th>
+              <th style="min-width: 320px;">Detail Pengirim & Penerima (One-Click Copy CS)</th>
               <th>Status</th>
-              <th>Kode Driver & Live Tracking</th>
+              <th>Kode Driver</th>
               <th class="text-end">Aksi CS / WH</th>
             </tr>
           </thead>
@@ -410,7 +427,7 @@
   </div>
 
   <script>
-    // MASUKKAN URL GOOGLE APPS SCRIPT SINI
+    // GANTI DENGAN URL APPS SCRIPT KAMU
     const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
 
     function updateClock() {
@@ -433,6 +450,21 @@
       }
     }
 
+    // Fungsi One-Click Copy untuk CS
+    function copyText(textToCopy, btnEl) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = btnEl.innerText;
+        btnEl.innerText = "✓ Copied!";
+        btnEl.style.backgroundColor = "#059669";
+        btnEl.style.color = "#FFFFFF";
+        setTimeout(() => {
+          btnEl.innerText = originalText;
+          btnEl.style.backgroundColor = "#F8FAFC";
+          btnEl.style.color = "#334155";
+        }, 1500);
+      });
+    }
+
     async function loadData() {
       try {
         const res = await fetch(API_URL);
@@ -452,6 +484,10 @@
 
           let timeFormatted = new Date(row.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
+          // String Siap Copy untuk CS
+          let pengirimCopyStr = `${row.namaPengirim || 'Gudang Aeris Beaute'} (${row.telpPengirim || '085892011583'}) - ${row.alamatPengirim || 'Gudang Aeris Beaute, Gedung Hyundai Lt. 5, Jl. D.I. Panjaitan No. 138'}`;
+          let penerimaCopyStr = `${row.namaPenerima || '-'} (${row.telpPenerima || '-'}) - ${row.alamatPenerima || '-'}`;
+
           html += `
             <tr>
               <td><span class="text-muted fw-normal">${timeFormatted}</span></td>
@@ -459,10 +495,22 @@
               <td><span class="badge bg-light text-dark border px-2 py-1">${row.channel}</span></td>
               <td>${row.jumlahKoli} Box</td>
               <td>
-                <div style="max-width: 280px; font-size: 0.82rem;">
-                  <div class="text-muted mb-1"><strong class="text-dark">Dari:</strong> ${row.namaPengirim || 'WH Aeris'} (${row.telpPengirim || '-'})</div>
-                  <div><strong class="text-dark">Ke:</strong> ${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</div>
-                  <div class="text-muted text-truncate" title="${row.alamatPenerima || ''}">${row.alamatPenerima || '-'}</div>
+                <div class="p-2 rounded-3 bg-light border">
+                  <!-- PENGIRIM -->
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-muted"><strong>Dari:</strong> ${row.namaPengirim || 'WH Aeris'} (${row.telpPengirim || '-'})</small>
+                    <button class="btn btn-copy" onclick="copyText('${pengirimCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Pengirim</button>
+                  </div>
+                  <small class="text-muted d-block mb-2 style="font-size: 0.78rem;">${row.alamatPengirim || '-'}</small>
+                  
+                  <hr class="my-1 border-secondary opacity-25">
+                  
+                  <!-- PENERIMA -->
+                  <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
+                    <small class="text-dark"><strong>Ke:</strong> ${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</small>
+                    <button class="btn btn-copy" onclick="copyText('${penerimaCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Penerima</button>
+                  </div>
+                  <small class="text-dark d-block fw-normal" style="font-size: 0.78rem;">${row.alamatPenerima || '-'}</small>
                 </div>
               </td>
               <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
@@ -524,7 +572,6 @@
       loadData();
     }
 
-    // CS INPUT DRIVER & LIVE TRACKING LINK
     async function updateBooking(rowIndex) {
       const driverName = prompt("1/2. CS Section: Masukkan Nama Ekspedisi, Nama Driver, & Plat Nomor / Kode Booking:");
       if (!driverName) return;
@@ -542,7 +589,6 @@
       loadData();
     }
 
-    // WH OUTBOUND COMPLETE HANDOVER
     async function completeHandover(rowIndex) {
       if (confirm("Konfirmasi: Paket sudah diserahkan ke Driver Instant?")) {
         const payload = { action: "COMPLETE_HANDOVER", rowIndex: rowIndex };

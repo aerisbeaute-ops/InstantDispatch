@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AERIS Beaute - Instant Dispatch Portal</title>
   
-  <!-- Font Modern Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   
   <style>
@@ -31,7 +28,6 @@
       padding-bottom: 3rem;
     }
 
-    /* Header Center Alignment */
     .header-section {
       text-align: center;
       margin-top: 2rem;
@@ -51,7 +47,6 @@
       font-weight: 500;
     }
 
-    /* Bento Grid Card Style */
     .bento-card {
       background: var(--bg-surface);
       border-radius: 24px;
@@ -66,7 +61,6 @@
       box-shadow: 0 15px 35px rgba(112, 20, 3, 0.06);
     }
 
-    /* Label Typography Standard */
     .label-uppercase {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -79,7 +73,6 @@
       gap: 0.4rem;
     }
 
-    /* Stat Metric Display */
     .stat-number {
       font-size: 2.5rem;
       font-weight: 800;
@@ -87,7 +80,6 @@
       line-height: 1;
     }
 
-    /* Large Input Form Style */
     .form-control-saas, .form-select-saas {
       background-color: #F8FAFC;
       border: 2px solid transparent;
@@ -105,13 +97,11 @@
       outline: none;
     }
 
-    /* Custom Dropdown Styling */
     .custom-channel-input {
       display: none;
       margin-top: 0.5rem;
     }
 
-    /* Button Primary Accent */
     .btn-aeris-primary {
       background-color: var(--primary-maroon);
       color: #FFFFFF;
@@ -139,11 +129,6 @@
       transition: all 0.2s ease;
     }
 
-    .btn-aeris-secondary:hover {
-      background-color: #F1F5F9;
-    }
-
-    /* Status Pill Badges */
     .badge-pill {
       border-radius: 50px;
       padding: 0.4rem 1rem;
@@ -153,22 +138,10 @@
       display: inline-block;
     }
 
-    .badge-pending {
-      background-color: #FEF3C7;
-      color: #92400E;
-    }
+    .badge-pending { background-color: #FEF3C7; color: #92400E; }
+    .badge-booked { background-color: #DBEAFE; color: #1E40AF; }
+    .badge-completed { background-color: #D1FAE5; color: #065F46; }
 
-    .badge-booked {
-      background-color: #DBEAFE;
-      color: #1E40AF;
-    }
-
-    .badge-completed {
-      background-color: #D1FAE5;
-      color: #065F46;
-    }
-
-    /* Modern Table Styling */
     .table-saas {
       width: 100%;
       border-collapse: separate;
@@ -194,19 +167,9 @@
       border-bottom: 1px solid #F1F5F9;
     }
 
-    .table-saas td:first-child {
-      border-top-left-radius: 14px;
-      border-bottom-left-radius: 14px;
-      border-left: 1px solid #F1F5F9;
-    }
+    .table-saas td:first-child { border-top-left-radius: 14px; border-bottom-left-radius: 14px; border-left: 1px solid #F1F5F9; }
+    .table-saas td:last-child { border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-right: 1px solid #F1F5F9; }
 
-    .table-saas td:last-child {
-      border-top-right-radius: 14px;
-      border-bottom-right-radius: 14px;
-      border-right: 1px solid #F1F5F9;
-    }
-
-    /* SVG Icon Sizing */
     .icon-svg {
       width: 18px;
       height: 18px;
@@ -217,16 +180,14 @@
       stroke-linejoin: round;
     }
 
-    .icon-maroon {
-      stroke: var(--primary-maroon);
-    }
+    .icon-maroon { stroke: var(--primary-maroon); }
   </style>
 </head>
 <body>
 
   <div class="container max-width-lg">
     
-    <!-- 1. Header Area (Center Aligned) -->
+    <!-- 1. Header Area -->
     <div class="header-section">
       <div class="d-inline-flex align-items-center justify-content-center p-3 mb-2 rounded-circle" style="background: rgba(112, 20, 3, 0.08);">
         <svg class="icon-svg icon-maroon" style="width: 32px; height: 32px;" viewBox="0 0 24 24">
@@ -236,13 +197,11 @@
         </svg>
       </div>
       <h1 class="brand-title">AERIS BEAUTE</h1>
-      <p class="brand-subtitle">Instant Dispatch Portal & Multi-Channel Transport Tracking</p>
-      <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-2 mt-1 fw-semibold" style="font-size: 0.8rem;">
-        <!-- Clock via JS -->
-      </div>
+      <p class="brand-subtitle">Instant Dispatch Portal & Receiver Contact Directory</p>
+      <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-2 mt-1 fw-semibold" style="font-size: 0.8rem;"></div>
     </div>
 
-    <!-- 2. Top Bento Grid (Summary Metrics) -->
+    <!-- 2. Metrics Bento Grid -->
     <div class="row g-4 mb-4">
       <div class="col-md-4">
         <div class="bento-card">
@@ -251,7 +210,7 @@
             Pending Booking
           </div>
           <div class="stat-number" id="metricPending">0</div>
-          <small class="text-muted mt-2 d-block">Menunggu penugasan CS</small>
+          <small class="text-muted mt-2 d-block">Menunggu penugasan driver CS</small>
         </div>
       </div>
       <div class="col-md-4">
@@ -261,7 +220,7 @@
             Driver Booked
           </div>
           <div class="stat-number" id="metricBooked" style="color: #2563EB;">0</div>
-          <small class="text-muted mt-2 d-block">Driver menuju gudang</small>
+          <small class="text-muted mt-2 d-block">Driver Otw penjemputan</small>
         </div>
       </div>
       <div class="col-md-4">
@@ -271,27 +230,25 @@
             Completed
           </div>
           <div class="stat-number" id="metricCompleted" style="color: #059669;">0</div>
-          <small class="text-muted mt-2 d-block">Selesai pickup hari ini</small>
+          <small class="text-muted mt-2 d-block">Selesai dikirim hari ini</small>
         </div>
       </div>
     </div>
 
-    <!-- 3. Bento Card: Form Input Request Dispatch -->
+    <!-- 3. Form Input Request Dispatch (Lengkap dengan Info Penerima) -->
     <div class="bento-card mb-4">
       <div class="label-uppercase mb-3">
         <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        Form Request Pickup Instant
+        Form Request Dispatch & Detail Penerima
       </div>
       
       <form id="dispatchForm" onsubmit="submitRequest(event)">
-        <div class="row g-3">
-          <!-- No Surat Jalan -->
+        <!-- Baris 1: Info Paket -->
+        <div class="row g-3 mb-3">
           <div class="col-md-3">
             <label class="form-label text-sm fw-bold">No. Resi / PO / Surat Jalan</label>
-            <input type="text" id="noSuratJalan" class="form-control form-control-saas" placeholder="SJ-OFF-1029 atau ID Resi" required>
+            <input type="text" id="noSuratJalan" class="form-control form-control-saas" placeholder="SJ-OFF-1029 / ID Resi" required>
           </div>
-          
-          <!-- Channel Select (With Custom Option) -->
           <div class="col-md-3">
             <label class="form-label text-sm fw-bold">Channel Asal Order</label>
             <select id="channelSelect" class="form-select form-select-saas" onchange="handleChannelChange(this)" required>
@@ -307,20 +264,31 @@
               </optgroup>
               <option value="CUSTOM_OPTION">+ Tambah Channel Lain (Custom)</option>
             </select>
-            <!-- Custom Input Input Field (Appears when Custom selected) -->
             <input type="text" id="customChannelInput" class="form-control form-control-saas custom-channel-input" placeholder="Tulis nama channel custom...">
           </div>
-          
-          <!-- QTY Koli -->
           <div class="col-md-3">
             <label class="form-label text-sm fw-bold">Jumlah Koli / Master Box</label>
             <input type="number" id="jumlahKoli" class="form-control form-control-saas" placeholder="1" min="1" required>
           </div>
-          
-          <!-- PIC Admin -->
           <div class="col-md-3">
             <label class="form-label text-sm fw-bold">PIC Admin Request</label>
-            <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Nama Admin WH/Divisi" required>
+            <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Nama Admin Request" required>
+          </div>
+        </div>
+
+        <!-- Baris 2: Info Penerima (Untuk Booking CS) -->
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label text-sm fw-bold">Nama Penerima / Toko Tujuan</label>
+            <input type="text" id="namaPenerima" class="form-control form-control-saas" placeholder="Contoh: Ibu Rina / BHI Haul" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label text-sm fw-bold">No. HP / WhatsApp Penerima</label>
+            <input type="text" id="telpPenerima" class="form-control form-control-saas" placeholder="0812xxxxxxx" required>
+          </div>
+          <div class="col-md-5">
+            <label class="form-label text-sm fw-bold">Alamat Lengkap Tujuan Pengiriman</label>
+            <input type="text" id="alamatPenerima" class="form-control form-control-saas" placeholder="Jl. Sudirman No. 12, Lantai 3 (Dekat Lobby)" required>
           </div>
         </div>
 
@@ -331,7 +299,7 @@
       </form>
     </div>
 
-    <!-- 4. Bento Card: Monitoring Table -->
+    <!-- 4. Monitoring Table -->
     <div class="bento-card">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="label-uppercase mb-0">
@@ -348,21 +316,19 @@
         <table class="table-saas">
           <thead>
             <tr>
-              <th>Waktu Request</th>
-              <th>No. Surat Jalan / PO</th>
+              <th>Waktu</th>
+              <th>No. Resi / PO</th>
               <th>Channel</th>
               <th>Koli</th>
-              <th>PIC Request</th>
+              <th>Detail Penerima (Untuk CS)</th>
               <th>Status</th>
-              <th>Kode Driver / Booking</th>
-              <th class="text-end">Aksi Koordinasi</th>
+              <th>Kode Driver</th>
+              <th class="text-end">Aksi CS / WH</th>
             </tr>
           </thead>
           <tbody id="tableBody">
             <tr>
-              <td colspan="8" class="text-center py-5 text-muted">
-                Memuat database dispatch...
-              </td>
+              <td colspan="8" class="text-center py-5 text-muted">Memuat database dispatch...</td>
             </tr>
           </tbody>
         </table>
@@ -372,10 +338,8 @@
   </div>
 
   <script>
-    // MASUKKAN URL GOOGLE APPS SCRIPT KAMU DI SINI (BERAKHIRAN /exec)
     const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
 
-    // Clock Rata Tengah
     function updateClock() {
       const now = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -384,7 +348,6 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Handle Custom Channel Dropdown
     function handleChannelChange(selectEl) {
       const customInput = document.getElementById("customChannelInput");
       if (selectEl.value === "CUSTOM_OPTION") {
@@ -397,15 +360,12 @@
       }
     }
 
-    // Load Data & Update Metric Badges
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
         
-        let pendingCount = 0;
-        let bookedCount = 0;
-        let completedCount = 0;
+        let pendingCount = 0, bookedCount = 0, completedCount = 0;
         let html = "";
 
         data.reverse().forEach(row => {
@@ -422,10 +382,15 @@
           html += `
             <tr>
               <td><span class="text-muted fw-normal">${timeFormatted}</span></td>
-              <td class="fw-bold">${row.noSuratJalan}</td>
+              <td class="fw-bold">${row.noSuratJalan}<br><small class="text-muted fw-normal">PIC: ${row.picAdmin}</small></td>
               <td><span class="badge bg-light text-dark border px-2 py-1">${row.channel}</span></td>
               <td>${row.jumlahKoli} Box</td>
-              <td>${row.picAdmin}</td>
+              <td>
+                <div style="max-width: 260px;">
+                  <div class="fw-bold">${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</div>
+                  <small class="text-muted d-block text-truncate">${row.alamatPenerima || '-'}</small>
+                </div>
+              </td>
               <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
               <td><small class="font-monospace text-muted">${row.kodeBooking || '-'}</small></td>
               <td class="text-end">
@@ -442,14 +407,12 @@
         document.getElementById("metricPending").innerText = pendingCount;
         document.getElementById("metricBooked").innerText = bookedCount;
         document.getElementById("metricCompleted").innerText = completedCount;
-
         document.getElementById("tableBody").innerHTML = html || `<tr><td colspan="8" class="text-center py-4 text-muted">Belum ada aktivitas request hari ini.</td></tr>`;
       } catch (err) {
         console.error("Error fetching data:", err);
       }
     }
 
-    // Submit New Request
     async function submitRequest(e) {
       e.preventDefault();
       
@@ -463,7 +426,10 @@
         noSuratJalan: document.getElementById("noSuratJalan").value.trim(),
         channel: selectedChannel,
         jumlahKoli: document.getElementById("jumlahKoli").value,
-        picAdmin: document.getElementById("picAdmin").value.trim()
+        picAdmin: document.getElementById("picAdmin").value.trim(),
+        namaPenerima: document.getElementById("namaPenerima").value.trim(),
+        telpPenerima: document.getElementById("telpPenerima").value.trim(),
+        alamatPenerima: document.getElementById("alamatPenerima").value.trim()
       };
 
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
@@ -473,7 +439,6 @@
       loadData();
     }
 
-    // CS Update Driver Info
     async function updateBooking(rowIndex) {
       const driverInfo = prompt("CS Section: Masukkan Nama Ekspedisi, Nama Driver, & Kode Booking / Plat Nomor:");
       if (!driverInfo) return;
@@ -483,7 +448,6 @@
       loadData();
     }
 
-    // WH Outbound Complete Handover
     async function completeHandover(rowIndex) {
       if (confirm("Konfirmasi: Paket sudah diserahkan ke Driver Instant?")) {
         const payload = { action: "COMPLETE_HANDOVER", rowIndex: rowIndex };
@@ -492,7 +456,6 @@
       }
     }
 
-    // Initial Load
     loadData();
   </script>
 </body>

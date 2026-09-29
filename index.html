@@ -206,7 +206,6 @@
     .table-saas td:first-child { border-top-left-radius: 14px; border-bottom-left-radius: 14px; border-left: 1px solid #F1F5F9; }
     .table-saas td:last-child { border-top-right-radius: 14px; border-bottom-right-radius: 14px; border-right: 1px solid #F1F5F9; }
 
-    /* SVG Icon Sizing */
     .icon-svg {
       width: 18px;
       height: 18px;
@@ -224,7 +223,7 @@
 
   <div class="container max-width-lg">
     
-    <!-- 1. Header Area (Center Aligned) -->
+    <!-- 1. Header Area -->
     <div class="header-section">
       <div class="d-inline-flex align-items-center justify-content-center p-3 mb-2 rounded-circle" style="background: rgba(112, 20, 3, 0.08);">
         <svg class="icon-svg icon-maroon" style="width: 32px; height: 32px;" viewBox="0 0 24 24">
@@ -234,7 +233,7 @@
         </svg>
       </div>
       <h1 class="brand-title">AERIS BEAUTE</h1>
-      <p class="brand-subtitle">Instant Dispatch Portal & Multi-Channel Dispatch Directory</p>
+      <p class="brand-subtitle">Instant Dispatch Portal & Multi-Channel Transport Tracking</p>
       <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-2 mt-1 fw-semibold" style="font-size: 0.8rem;"></div>
     </div>
 
@@ -272,7 +271,7 @@
       </div>
     </div>
 
-    <!-- 3. Form Input Request Dispatch (Rapi 3 Seksi Terpisah) -->
+    <!-- 3. Form Input Request Dispatch -->
     <div class="bento-card mb-4">
       <div class="label-uppercase mb-4" style="font-size: 0.85rem;">
         <svg class="icon-svg icon-maroon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -320,7 +319,7 @@
           </div>
         </div>
 
-        <!-- SEKSI 2: DETAIL PENGIRIM (TITIK GUDANG PENJEMPUTAN) -->
+        <!-- SEKSI 2: DETAIL PENGIRIM -->
         <div class="section-box mb-4">
           <div class="section-title-sm">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -342,7 +341,7 @@
           </div>
         </div>
 
-        <!-- SEKSI 3: DETAIL PENERIMA (TITIK TUJUAN PENGIRIMAN) -->
+        <!-- SEKSI 3: DETAIL PENERIMA -->
         <div class="section-box mb-4">
           <div class="section-title-sm">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -395,7 +394,7 @@
               <th>Koli</th>
               <th>Detail Pengirim & Penerima</th>
               <th>Status</th>
-              <th>Kode Driver</th>
+              <th>Kode Driver & Live Tracking</th>
               <th class="text-end">Aksi CS / WH</th>
             </tr>
           </thead>
@@ -411,8 +410,8 @@
   </div>
 
   <script>
-    // GANTI DENGAN URL APPS SCRIPT KAMU
-    const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
+    // MASUKKAN URL GOOGLE APPS SCRIPT SINI
+    const API_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
     function updateClock() {
       const now = new Date();
@@ -467,7 +466,15 @@
                 </div>
               </td>
               <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
-              <td><small class="font-monospace text-muted">${row.kodeBooking || '-'}</small></td>
+              <td>
+                ${row.kodeBooking && row.kodeBooking !== '-' ? `
+                  <div class="fw-bold">${row.kodeBooking}</div>${row.trackingLink && row.trackingLink !== '#' ? `
+                    <a href="${row.trackingLink}" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 mt-1 fw-bold" style="font-size: 0.72rem;">
+                      🔗 Lacak Driver Live
+                    </a>
+                  ` : ''}
+                ` : '<small class="text-muted">-</small>'}
+              </td>
               <td class="text-end">
                 ${row.status === 'PENDING BOOKING' ? 
                   `<button class="btn btn-sm btn-primary fw-bold rounded-3" onclick="updateBooking(${row.rowIndex})">CS: Input Driver</button>` : ''}
@@ -517,15 +524,25 @@
       loadData();
     }
 
+    // CS INPUT DRIVER & LIVE TRACKING LINK
     async function updateBooking(rowIndex) {
-      const driverInfo = prompt("CS Section: Masukkan Nama Ekspedisi, Nama Driver, & Kode Booking / Plat Nomor:");
-      if (!driverInfo) return;
-      
-      const payload = { action: "UPDATE_BOOKING", rowIndex: rowIndex, kodeBooking: driverInfo };
+      const driverName = prompt("1/2. CS Section: Masukkan Nama Ekspedisi, Nama Driver, & Plat Nomor / Kode Booking:");
+      if (!driverName) return;
+
+      const trackingLink = prompt("2/2. CS Section: Tempel (Paste) Link Live Tracking Ekspedisi (GoSend/GrabExpress/Lalamove):");
+
+      const payload = { 
+        action: "UPDATE_BOOKING", 
+        rowIndex: rowIndex, 
+        kodeBooking: driverName,
+        trackingLink: trackingLink ? trackingLink.trim() : "#" 
+      };
+
       await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
       loadData();
     }
 
+    // WH OUTBOUND COMPLETE HANDOVER
     async function completeHandover(rowIndex) {
       if (confirm("Konfirmasi: Paket sudah diserahkan ke Driver Instant?")) {
         const payload = { action: "COMPLETE_HANDOVER", rowIndex: rowIndex };

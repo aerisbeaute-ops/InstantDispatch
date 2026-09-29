@@ -32,7 +32,6 @@
       padding-bottom: 2rem;
     }
 
-    /* Header Center Alignment */
     .header-section {
       text-align: center;
       margin-top: 1rem;
@@ -52,7 +51,6 @@
       font-weight: 500;
     }
 
-    /* Bento Grid Card Style */
     .bento-card {
       background: var(--bg-surface);
       border-radius: 20px;
@@ -177,22 +175,14 @@
     .badge-booked { background-color: #DBEAFE; color: #1E40AF; }
     .badge-completed { background-color: #D1FAE5; color: #065F46; }
 
-    /* PAKSA FORMAT SPLIT SCREEN KIRI KANAN */
     .split-layout {
       display: flex;
       gap: 1.25rem;
       align-items: flex-start;
     }
 
-    .left-panel {
-      flex: 0 0 42%;
-      max-width: 42%;
-    }
-
-    .right-panel {
-      flex: 0 0 58%;
-      max-width: 58%;
-    }
+    .left-panel { flex: 0 0 42%; max-width: 42%; }
+    .right-panel { flex: 0 0 58%; max-width: 58%; }
 
     @media (max-width: 991px) {
       .split-layout { flex-direction: column; }
@@ -200,7 +190,7 @@
     }
 
     .table-container {
-      max-height: 480px;
+      max-height: 440px;
       overflow-y: auto;
     }
 
@@ -251,11 +241,11 @@
     <!-- Header Area -->
     <div class="header-section">
       <h1 class="brand-title">AERIS BEAUTE</h1>
-      <p class="brand-subtitle mb-1">Instant Dispatch Portal & Live Driver Tracking Directory</p>
+      <p class="brand-subtitle mb-1">Instant Dispatch Portal & Back-Date Directory Search</p>
       <div id="liveClock" class="badge rounded-pill bg-white text-muted shadow-sm px-3 py-1 fw-semibold" style="font-size: 0.72rem;"></div>
     </div>
 
-    <!-- SPLIT LAYOUT LGSG PAKSA KIRI KANAN -->
+    <!-- SPLIT LAYOUT -->
     <div class="split-layout">
       
       <!-- KIRI: FORM REQUEST -->
@@ -268,15 +258,29 @@
           
           <form id="dispatchForm" onsubmit="submitRequest(event)">
             
-            <!-- SEKSI 1 -->
+            <!-- SEKSI 1: DOKUMEN & DIVISI (LENGKAP SESUAI FORM LAMA) -->
             <div class="section-box">
-              <div class="section-title-sm">1. Dokumen & Channel</div>
+              <div class="section-title-sm">1. Dokumen & Division Request</div>
               <div class="row g-2">
                 <div class="col-6">
-                  <label class="form-label text-sm fw-bold mb-0">No. Resi/PO/SJ</label>
+                  <label class="form-label text-sm fw-bold mb-0">No. Resi / PO / SJ</label>
                   <input type="text" id="noSuratJalan" class="form-control form-control-saas" placeholder="SJ-OFF-1029" required>
                 </div>
                 <div class="col-6">
+                  <label class="form-label text-sm fw-bold mb-0">Division Request *</label>
+                  <select id="divisionSelect" class="form-select form-select-saas" required>
+                    <option value="Warehouse Team">Warehouse Team</option>
+                    <option value="Creative Team">Creative Team</option>
+                    <option value="Sales Team">Sales Team</option>
+                    <option value="Finance Team">Finance Team</option>
+                    <option value="Product Development">Product Development</option>
+                    <option value="KOL & Community Team">KOL & Community Team</option>
+                    <option value="Brand Communication & Activation">Brand Comm & Activation</option>
+                    <option value="Social Media & Digital Activation">Social Media & Digital</option>
+                    <option value="General Affair & IT Team">General Affair & IT Team</option>
+                  </select>
+                </div>
+                <div class="col-6 mt-1">
                   <label class="form-label text-sm fw-bold mb-0">Channel Order</label>
                   <select id="channelSelect" class="form-select form-select-saas" onchange="handleChannelChange(this)" required>
                     <optgroup label="Channel Offline">
@@ -287,24 +291,24 @@
                     </optgroup>
                     <optgroup label="Online & Internal">
                       <option value="E-Commerce Online">Online Marketplace</option>
-                      <option value="Divisi WH Internal">Divisi WH Internal</option>
+                      <option value="Divisi WH Internal">Divisi Internal Transfer</option>
                     </optgroup>
                     <option value="CUSTOM_OPTION">+ Custom Channel</option>
                   </select>
                   <input type="text" id="customChannelInput" class="form-control form-control-saas custom-channel-input" placeholder="Nama channel custom...">
                 </div>
-                <div class="col-6 mt-1">
-                  <label class="form-label text-sm fw-bold mb-0">Koli/Box</label>
-                  <input type="number" id="jumlahKoli" class="form-control form-control-saas" placeholder="1" min="1" required>
+                <div class="col-3 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">Box/Koli</label>
+                  <input type="number" id="jumlahKoli" class="form-control form-control-saas" value="1" min="1" required>
                 </div>
-                <div class="col-6 mt-1">
-                  <label class="form-label text-sm fw-bold mb-0">PIC Admin WH</label>
-                  <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Nama Admin" required>
+                <div class="col-3 mt-1">
+                  <label class="form-label text-sm fw-bold mb-0">PIC Request</label>
+                  <input type="text" id="picAdmin" class="form-control form-control-saas" placeholder="Admin" required>
                 </div>
               </div>
             </div>
 
-            <!-- SEKSI 2 -->
+            <!-- SEKSI 2: PENGIRIM -->
             <div class="section-box">
               <div class="section-title-sm">2. Info Pengirim (Penjemputan)</div>
               <div class="row g-2">
@@ -317,13 +321,13 @@
                   <input type="text" id="telpPengirim" class="form-control form-control-saas" value="085892011583" required>
                 </div>
                 <div class="col-12 mt-1">
-                  <label class="form-label text-sm fw-bold mb-0">Alamat Gudang Penjemputan</label>
-                  <input type="text" id="alamatPengirim" class="form-control form-control-saas" value="Gudang Aeris Lt. 5, Jl. DI. Panjaitan No.138, RT.15/RW.2, Cipinang Besar Sel., Jatinegara, Jakarta Timur 13410" required>
+                  <label class="form-label text-sm fw-bold mb-0">Alamat Penjemputan Gudang</label>
+                  <input type="text" id="alamatPengirim" class="form-control form-control-saas" value="Gudang Aeris Lt. 5, Gedung Hyundai, Jl. D.I. Panjaitan No. 138, Cipinang Muara, Jakarta Timur" required>
                 </div>
               </div>
             </div>
 
-            <!-- SEKSI 3 -->
+            <!-- SEKSI 3: PENERIMA -->
             <div class="section-box">
               <div class="section-title-sm">3. Info Penerima (Tujuan)</div>
               <div class="row g-2">
@@ -349,7 +353,7 @@
         </div>
       </div>
 
-      <!-- KANAN: METRICS & LOG TABLE -->
+      <!-- KANAN: SEARCH BACK-DATE, METRICS, & LOG TABLE -->
       <div class="right-panel">
         
         <div class="row g-2 mb-2">
@@ -374,16 +378,25 @@
         </div>
 
         <div class="bento-card">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="label-uppercase mb-0">Aktivitas & Log Dispatch</div>
-            <button class="btn btn-aeris-secondary" onclick="loadData()">Refresh</button>
+          <!-- SEARCH & BACK-DATE FILTER TOOLBAR -->
+          <div class="row g-2 mb-2">
+            <div class="col-md-5">
+              <input type="text" id="searchInput" class="form-control form-control-saas" placeholder="🔍 Cari Resi, Divisi, atau Penerima..." onkeyup="filterData()">
+            </div>
+            <div class="col-md-4">
+              <input type="date" id="dateFilter" class="form-control form-control-saas" onchange="filterData()">
+            </div>
+            <div class="col-md-3 d-flex gap-1">
+              <button class="btn btn-aeris-secondary w-100" onclick="exportCSVData()">📥 CSV</button>
+              <button class="btn btn-aeris-secondary" onclick="loadData()">🔄</button>
+            </div>
           </div>
 
           <div class="table-container">
             <table class="table-saas">
               <thead>
                 <tr>
-                  <th>Order</th>
+                  <th>Order & Division</th>
                   <th>Pengirim & Penerima (Copy CS)</th>
                   <th>Status</th>
                   <th>Driver / Link</th>
@@ -414,13 +427,15 @@
           <input type="hidden" id="modalRowIndex">
           
           <div class="mb-2">
-            <label class="form-label text-sm fw-bold">Platform Ekspedisi</label>
+            <label class="form-label text-sm fw-bold">Platform Ekspedisi (Sesuai Form Lama)</label>
             <select id="modalPlatform" class="form-select form-select-saas">
-              <option value="GoSend Instant">GoSend Instant</option>
-              <option value="GrabExpress Instant">GrabExpress Instant</option>
+              <option value="Gojek / GoSend Instant">Gojek / GoSend Instant</option>
               <option value="Lalamove">Lalamove</option>
-              <option value="Gobox / Kargo">Gobox / Kargo Instant</option>
-              <option value="Lainnya">Lainnya / Kurir Internal</option>
+              <option value="GrabExpress Instant">GrabExpress Instant</option>
+              <option value="Activation Apple">Activation Apple</option>
+              <option value="Biteship">Biteship</option>
+              <option value="Gobox / Kargo">Gobox / Kargo</option>
+              <option value="Kurir Internal">Kurir Internal / Other</option>
             </select>
           </div>
 
@@ -443,7 +458,6 @@
   </div>
 
   <script>
-    // MASUKKAN URL APPS SCRIPT KAMU BERAKHIRAN /exec DI SINI
     const API_URL = "https://script.google.com/macros/s/AKfycbwlm9xCu3oRcog13QBGQMdSiR6eQujFQ_NuudsHHyttk1im8UDtr24t6JBnYyNJS3hV/exec";
     let csModal;
     let globalDataCache = [];
@@ -514,74 +528,118 @@
         const data = await res.json();
         globalDataCache = data;
         populateAutocomplete(data);
-
-        let pendingCount = 0, bookedCount = 0, completedCount = 0;
-        let html = "";
-
-        data.slice().reverse().forEach(row => {
-          if (row.status === "PENDING BOOKING") pendingCount++;
-          if (row.status === "DRIVER BOOKED") bookedCount++;
-          if (row.status === "COMPLETED") completedCount++;
-
-          let badgeClass = "badge-pending";
-          if (row.status === "DRIVER BOOKED") badgeClass = "badge-booked";
-          if (row.status === "COMPLETED") badgeClass = "badge-completed";
-
-          let timeFormatted = new Date(row.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-          let pengirimCopyStr = `${row.namaPengirim || 'Gudang Aeris Beaute'} (${row.telpPengirim || '085892011583'}) - ${row.alamatPengirim || 'Gudang Aeris Lt. 5'}`;
-          let penerimaCopyStr = `${row.namaPenerima || '-'} (${row.telpPenerima || '-'}) - ${row.alamatPenerima || '-'}`;
-
-          html += `
-            <tr>
-              <td>
-                <div class="fw-bold">${row.noSuratJalan}</div>
-                <span class="badge bg-light text-dark border me-1" style="font-size:0.68rem;">${row.channel}</span>
-                <span class="text-muted small">${row.jumlahKoli} Box</span>
-                <div class="text-muted" style="font-size: 0.7rem;">${timeFormatted} | PIC: ${row.picAdmin}</div>
-              </td>
-              <td>
-                <div class="p-2 rounded-2 bg-light border" style="font-size: 0.75rem;">
-                  <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="text-muted"><strong>Dari:</strong> ${row.namaPengirim || 'WH Aeris'}</span>
-                    <button class="btn btn-copy" onclick="copyText('${pengirimCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Pengirim</button>
-                  </div>
-                  <hr class="my-1 border-secondary opacity-25">
-                  <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
-                    <span class="text-dark"><strong>Ke:</strong> ${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</span>
-                    <button class="btn btn-copy" onclick="copyText('${penerimaCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Penerima</button>
-                  </div>
-                  <div class="text-dark fw-normal">${row.alamatPenerima || '-'}</div>
-                </div>
-              </td>
-              <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
-              <td>
-                ${row.kodeBooking && row.kodeBooking !== '-' ? `
-                  <div class="fw-bold" style="font-size: 0.78rem;">${row.kodeBooking}</div>${row.trackingLink && row.trackingLink !== '#' ? `
-                    <a href="${row.trackingLink}" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 mt-1 fw-bold" style="font-size: 0.68rem;">
-                      🔗 Lacak Driver Live
-                    </a>
-                  ` : ''}
-                ` : '<small class="text-muted">-</small>'}
-              </td>
-              <td class="text-end">
-                ${row.status === 'PENDING BOOKING' ? 
-                  `<button class="btn btn-sm btn-primary fw-bold rounded-2" style="font-size:0.75rem;" onclick="openCSModal(${row.rowIndex})">CS: Assign</button>` : ''}
-                ${row.status === 'DRIVER BOOKED' ? 
-                  `<button class="btn btn-sm btn-success fw-bold rounded-2" style="font-size:0.75rem;" onclick="completeHandover(${row.rowIndex})">WH: Handover</button>` : ''}
-                ${row.status === 'COMPLETED' ? `<span class="text-success small fw-bold">✓ Selesai</span>` : ''}
-              </td>
-            </tr>
-          `;
-        });
-
-        document.getElementById("metricPending").innerText = pendingCount;
-        document.getElementById("metricBooked").innerText = bookedCount;
-        document.getElementById("metricCompleted").innerText = completedCount;
-        document.getElementById("tableBody").innerHTML = html || `<tr><td colspan="5" class="text-center py-4 text-muted">Belum ada aktivitas request hari ini.</td></tr>`;
+        renderTable(data);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
+    }
+
+    function renderTable(dataList) {
+      let pendingCount = 0, bookedCount = 0, completedCount = 0;
+      let html = "";
+
+      dataList.slice().reverse().forEach(row => {
+        if (row.status === "PENDING BOOKING") pendingCount++;
+        if (row.status === "DRIVER BOOKED") bookedCount++;
+        if (row.status === "COMPLETED") completedCount++;
+
+        let badgeClass = "badge-pending";
+        if (row.status === "DRIVER BOOKED") badgeClass = "badge-booked";
+        if (row.status === "COMPLETED") badgeClass = "badge-completed";
+
+        let dateObj = new Date(row.timestamp);
+        let dateFormatted = dateObj.toLocaleDateString('id-ID');
+        let timeFormatted = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+        let pengirimCopyStr = `${row.namaPengirim || 'Gudang Aeris Beaute'} (${row.telpPengirim || '085892011583'}) - ${row.alamatPengirim || 'Gudang Aeris Lt. 5'}`;
+        let penerimaCopyStr = `${row.namaPenerima || '-'} (${row.telpPenerima || '-'}) - ${row.alamatPenerima || '-'}`;
+
+        html += `
+          <tr>
+            <td>
+              <div class="fw-bold">${row.noSuratJalan}</div>
+              <span class="badge bg-light text-dark border me-1" style="font-size:0.68rem;">${row.division || 'Warehouse'}</span>
+              <span class="text-muted small">${row.channel} | ${row.jumlahKoli} Box</span>
+              <div class="text-muted" style="font-size: 0.7rem;">${dateFormatted} ${timeFormatted} | PIC: ${row.picAdmin}</div>
+            </td>
+            <td>
+              <div class="p-2 rounded-2 bg-light border" style="font-size: 0.75rem;">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="text-muted"><strong>Dari:</strong> ${row.namaPengirim || 'WH Aeris'}</span>
+                  <button class="btn btn-copy" onclick="copyText('${pengirimCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Pengirim</button>
+                </div>
+                <hr class="my-1 border-secondary opacity-25">
+                <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
+                  <span class="text-dark"><strong>Ke:</strong> ${row.namaPenerima || '-'} (${row.telpPenerima || '-'})</span>
+                  <button class="btn btn-copy" onclick="copyText('${penerimaCopyStr.replace(/'/g, "\\'")}', this)">📋 Copy Penerima</button>
+                </div>
+                <div class="text-dark fw-normal">${row.alamatPenerima || '-'}</div>
+              </div>
+            </td>
+            <td><span class="badge-pill ${badgeClass}">${row.status}</span></td>
+            <td>
+              ${row.kodeBooking && row.kodeBooking !== '-' ? `
+                <div class="fw-bold" style="font-size: 0.78rem;">${row.kodeBooking}</div>${row.trackingLink && row.trackingLink !== '#' ? `
+                  <a href="${row.trackingLink}" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 mt-1 fw-bold" style="font-size: 0.68rem;">
+                    🔗 Lacak Driver Live
+                  </a>
+                ` : ''}
+              ` : '<small class="text-muted">-</small>'}
+            </td>
+            <td class="text-end">
+              ${row.status === 'PENDING BOOKING' ? 
+                `<button class="btn btn-sm btn-primary fw-bold rounded-2" style="font-size:0.75rem;" onclick="openCSModal(${row.rowIndex})">CS: Assign</button>` : ''}
+              ${row.status === 'DRIVER BOOKED' ? 
+                `<button class="btn btn-sm btn-success fw-bold rounded-2" style="font-size:0.75rem;" onclick="completeHandover(${row.rowIndex})">WH: Handover</button>` : ''}
+              ${row.status === 'COMPLETED' ? `<span class="text-success small fw-bold">✓ Selesai</span>` : ''}
+            </td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("metricPending").innerText = pendingCount;
+      document.getElementById("metricBooked").innerText = bookedCount;
+      document.getElementById("metricCompleted").innerText = completedCount;
+      document.getElementById("tableBody").innerHTML = html || `<tr><td colspan="5" class="text-center py-4 text-muted">Hasil pencarian/filter tidak ditemukan.</td></tr>`;
+    }
+
+    // FILTER SEARCH BACK-DATE & KEYWORD
+    function filterData() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const dateVal = document.getElementById("dateFilter").value;
+
+      const filtered = globalDataCache.filter(row => {
+        let matchQuery = (row.noSuratJalan || '').toLowerCase().includes(query) || 
+                         (row.namaPenerima || '').toLowerCase().includes(query) ||
+                         (row.division || '').toLowerCase().includes(query) ||
+                         (row.channel || '').toLowerCase().includes(query);
+        
+        let matchDate = true;
+        if (dateVal) {
+          let rowDate = new Date(row.timestamp).toISOString().slice(0, 10);
+          matchDate = (rowDate === dateVal);
+        }
+
+        return matchQuery && matchDate;
+      });
+
+      renderTable(filtered);
+    }
+
+    // EXPORT DATA CSV DARI PORTAL
+    function exportCSVData() {
+      let csvContent = "data:text/csv;charset=utf-8,Timestamp,No Surat Jalan,Division,Channel,Koli,PIC,Status,Kode Booking,Penerima,Telp Penerima,Alamat Penerima\n";
+      globalDataCache.forEach(r => {
+        csvContent += `"${r.timestamp}","${r.noSuratJalan}","${r.division || 'Warehouse'}","${r.channel}",${r.jumlahKoli},"${r.picAdmin}","${r.status}","${r.kodeBooking}","${r.namaPenerima}","${r.telpPenerima}","${r.alamatPenerima}"\n`;
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `AERIS_Dispatch_Archive_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 
     async function submitRequest(e) {
@@ -594,6 +652,7 @@
       const payload = {
         action: "CREATE_REQUEST",
         noSuratJalan: document.getElementById("noSuratJalan").value.trim(),
+        division: document.getElementById("divisionSelect").value,
         channel: selectedChannel,
         jumlahKoli: document.getElementById("jumlahKoli").value,
         picAdmin: document.getElementById("picAdmin").value.trim(),
